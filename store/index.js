@@ -3,18 +3,25 @@ const LENGTH_MIN = 1
 const LENGTH_MAX = 1024
 const TABLE_ALPHABET_NUMBER = 'abcdefghijklmnopqrstuvwxyz1234567890'
 const TABLE_UPPERCATE_ALPHABET = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-const TABLE_SYMBOL = '$%-/=@_'
-const TABLE_SPECIAL_SYMBOL = '!"#&amp;\'()*+,.:;&gt;&lt;?[]\\^`{}|~'
+const TABLE_ARRAY_SYMBOL = [
+  '()', '[]', '{}', '<>',
+  '$', '%', '@', '#', '&', '?', '!',
+  '-', '=', '_', '/', '*', '+', '\\', '|', '~',
+  '"', '\'', '`', '^', ',', '.', ':', ';'
+]
 
-export const state = () => ({
-  configration: {
-    length: LENGTH_DEFAULT,
-    includeUpper: true,
-    includeSymbol: true,
-    includeSpecialSymbol: true
-  },
-  generatedString: ''
-})
+export const state = () => {
+  const symbols = {}
+  TABLE_ARRAY_SYMBOL.forEach((key) => { symbols[key] = false })
+  return {
+    configration: {
+      length: LENGTH_DEFAULT,
+      includeUpper: true,
+      includeSymbol: symbols
+    },
+    generatedString: ''
+  }
+}
 
 export const mutations = {
   setStringLength (state, length) {
@@ -27,11 +34,8 @@ export const mutations = {
   toggleIncludeUpper (state) {
     state.configration.includeUpper = !state.configration.includeUpper
   },
-  toggleIncludeSymbol (state) {
-    state.configration.includeSymbol = !state.configration.includeSymbol
-  },
-  toggleIncludeSpecialSymbol (state) {
-    state.configration.includeSpecialSymbol = !state.configration.includeSpecialSymbol
+  toggleIncludeSymbol (state, key) {
+    state.configration.includeSymbol[key] = !state.configration.includeSymbol[key]
   },
   generate (state) {
     let table = TABLE_ALPHABET_NUMBER
@@ -39,13 +43,11 @@ export const mutations = {
       table += TABLE_UPPERCATE_ALPHABET
     }
 
-    if (state.configration.includeSymbol) {
-      table += TABLE_SYMBOL
-    }
-
-    if (state.configration.includeSpecialSymbol) {
-      table += TABLE_SPECIAL_SYMBOL
-    }
+    Object.keys(state.configration.includeSymbol).forEach((v) => {
+      if (state.configration.includeSymbol[v]) {
+        table += v
+      }
+    })
 
     const array = new Uint32Array(state.configration.length)
     window.crypto.getRandomValues(array)

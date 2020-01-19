@@ -14,15 +14,11 @@
           <div class="field" />
           <label class="checkbox">
             <input type="checkbox" :checked="config.includeUpper" @change="updateIncludeUpper">
-            Upper Alphabet (e.g. A, B, C...)
+            Upper Alphabet
           </label><br>
-          <label class="checkbox">
-            <input type="checkbox" :checked="config.includeSymbol" @change="updateIncludeSymbol">
-            $%-/=@_
-          </label><br>
-          <label class="checkbox">
-            <input type="checkbox" :checked="config.includeSpecialSymbol" @change="updateIncludeSpecialSymbol">
-            !"#&amp;'()*+,.:;&gt;&lt;?[]\^`{}|~
+          <label class="checkbox checkbox-symbol" v-for="(value, key, index) in config.includeSymbol" :key="index">
+            <input type="checkbox" :checked="value" @change="updateIncludeSymbol(key)">
+            {{ key }}
           </label>
         </div>
       </div>
@@ -57,7 +53,6 @@ export default {
     ...mapMutations({
       updateIncludeUpper: 'toggleIncludeUpper',
       updateIncludeSymbol: 'toggleIncludeSymbol',
-      updateIncludeSpecialSymbol: 'toggleIncludeSpecialSymbol',
       generate: 'generate'
     })
   }
@@ -65,6 +60,10 @@ export default {
 </script>
 
 <style>
+.checkbox-symbol {
+  min-width: 45px;
+  margin-right: 16px;
+}
 .main-container {
   margin: 0 auto;
   min-height: 25vh;

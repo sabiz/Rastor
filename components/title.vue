@@ -5,7 +5,7 @@
         Rastor
       </h1>
       <h2 class="subtitle">
-        <u>Ra</u>ndom <u>St</u>ring Generat<u>or</u> v1.0
+        <u>Ra</u>ndom <u>St</u>ring Generat<u>or</u> v1.1
       </h2>
     </div>
   </div>
