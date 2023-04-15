@@ -1,12 +1,8 @@
 <template>
   <div class="hero-head">
     <div class="container">
-      <h1 class="title">
-        Rastor
-      </h1>
-      <h2 class="subtitle">
-        <u>Ra</u>ndom <u>St</u>ring Generat<u>or</u> v1.1
-      </h2>
+      <h1 class="title">Rastor</h1>
+      <h2 class="subtitle"><u>Ra</u>ndom <u>St</u>ring Generat<u>or</u> v1.2</h2>
     </div>
   </div>
 </template>

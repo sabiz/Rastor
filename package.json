@@ -1,30 +1,36 @@
 {
-  "name": "Rastor",
-  "version": "1.1.0",
-  "description": "RAndom STring generatOR",
-  "author": "sabiz",
+  "name": "rastor",
+  "version": "1.2.0",
   "private": true,
   "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "deploy": "run-s deploy:gen deploy:push",
-    "deploy:gen": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate",
-    "deploy:push": "push-dir --dir=dist --branch=master --cleanup",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test:unit": "vitest",
+    "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore",
+    "format": "prettier --write src/",
+    "deploy": "run-s build deploy:push",
+    "deploy:push": "push-dir --dir=dist --branch=master --cleanup"
   },
   "dependencies": {
-    "@nuxtjs/bulma": "^1.2.1",
-    "nuxt": "^2.15.8"
+    "animate.css": "^4.1.1",
+    "bulma": "^0.9.4",
+    "sass": "^1.62.0",
+    "vue": "^3.2.47",
+    "vue-router": "^4.1.6",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@nuxtjs/eslint-config": "^1.0.1",
-    "@nuxtjs/eslint-module": "^1.2.0",
-    "babel-eslint": "^10.0.1",
-    "cross-env": "^6.0.3",
-    "eslint": "^6.8.0",
-    "eslint-plugin-nuxt": ">=0.4.2",
-    "npm-run-all": "^4.1.5",
-    "push-dir": "^0.4.1"
+    "@rushstack/eslint-patch": "^1.2.0",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "@vue/eslint-config-prettier": "^7.1.0",
+    "@vue/test-utils": "^2.3.0",
+    "bulma-toast": "^2.4.2",
+    "eslint": "^8.34.0",
+    "eslint-plugin-vue": "^9.9.0",
+    "jsdom": "^21.1.0",
+    "prettier": "^2.8.4",
+    "vite": "^4.1.4",
+    "vitest": "^0.29.1"
   }
 }
